@@ -226,16 +226,6 @@ class InSampleAC(base.Agent):
                 p_targ.data.mul_(self.polyak)
                 p_targ.data.add_((1 - self.polyak) * p.data)
 
-    def save(self):
-        parameters_dir = self.parameters_dir
-        path = os.path.join(parameters_dir, "actor_net")
-        torch.save(self.ac.pi.state_dict(), path)
-    
-        path = os.path.join(parameters_dir, "critic_net")
-        torch.save(self.ac.q1q2.state_dict(), path)
-    
-        path = os.path.join(parameters_dir, "vs_net")
-        torch.save(self.value_net.state_dict(), path)
 
 
 
