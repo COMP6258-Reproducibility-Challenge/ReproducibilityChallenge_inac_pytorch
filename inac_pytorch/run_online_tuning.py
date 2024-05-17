@@ -3,7 +3,7 @@ import argparse
 
 import core.environment.env_factory as environment
 from core.utils import torch_utils, logger, run_funcs
-from core.agent.in_sample import InSampleAC
+from core.agent.in_sample import InSampleAConline
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="run_file")
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     cfg.logger = logger.Logger(cfg, cfg.exp_path)
     logger.log_config(cfg)
 
-    agent_obj = InSampleAC(
+    agent_obj = InSampleAConline(
         device=cfg.device,
         discrete_control=cfg.discrete_control,
         state_dim=cfg.state_dim,
