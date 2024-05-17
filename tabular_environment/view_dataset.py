@@ -3,7 +3,7 @@ import pickle
 import os
 from collections import Counter
 
-data_path = '/core/complete_data_expert.pkl'
+data_path = 'core/complete_data_expert.pkl'
 
 def analyze_data(data_path):
     with open(data_path, 'rb') as f:
