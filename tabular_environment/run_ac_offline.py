@@ -8,7 +8,7 @@ from core.agent.in_sample import *
 
 def load_data(dataset_name):
     base_path = "core/"
-    dataset_suffix = {'expert': 'expert', 'random': 'random', 'missing': 'missing', 'mixed': 'mixed'}
+    dataset_suffix = {'expert': 'expert', 'random': 'random', 'missing1': 'missing', 'missing2': 'missing2', 'mixed': 'mixed'}
     dataset_file = f"complete_data_{dataset_suffix[dataset_name]}.pkl"
     file_path = os.path.join(base_path, dataset_file)
     
@@ -28,7 +28,7 @@ def run_experiment(learning_rate, seed, dataset_name='expert'):
     parser = argparse.ArgumentParser(description="run_file")
     parser.add_argument('--seed', default=seed, type=int)
     parser.add_argument('--env_name', default='grid', type=str)
-    parser.add_argument('--dataset', default=dataset_name, type=str, choices=['expert', 'random', 'missing', 'mixed'])
+    parser.add_argument('--dataset', default=dataset_name, type=str, choices=['expert', 'random', 'missing1', 'missing2', 'mixed'])
     parser.add_argument('--discrete_control', default=1, type=int)
     parser.add_argument('--state_dim', default=2, type=int)
     parser.add_argument('--action_dim', default=4, type=int)

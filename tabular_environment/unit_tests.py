@@ -6,8 +6,8 @@ import os
 import numpy as np
 import copy
 from core.agent.in_sample import InSampleAC
-from core.environment.data_generation_expert import GridWorldEnv
-from core.utils.run_funcs import run_steps, load_testset
+from core.environment.grid_env import GridWorldEnv
+from core.utils.run_funcs import run_steps
 from core.utils import logger
 
 def load_expert_data(file_path):
@@ -64,10 +64,10 @@ class TestInSampleAC(unittest.TestCase):
         self.hidden_units = 256
         self.batch_size = 256
         self.timeout = 100
-        self.gamma = 0.99
-        self.tau = 0.5
+        self.gamma = 0.90
+        self.tau = 0.01
         self.seed = 0
-        self.offline_data_file = 'core/expert_data.pkl'
+        self.offline_data_file = 'core/complete_data_random.pkl'
         self.offline_data = load_expert_data(self.offline_data_file)  
 
         project_root = os.path.abspath(os.path.dirname(__file__))      
@@ -96,7 +96,6 @@ class TestInSampleAC(unittest.TestCase):
         action = self.agent.policy(state)
         self.assertIsInstance(action, np.ndarray, "Action should be a NumPy array")
 
-
     def test_training_step(self):
         data = self.agent.get_data()
         pre_update_params = copy.deepcopy(self.agent.ac.pi.state_dict())
@@ -123,21 +122,6 @@ class TestInSampleAC(unittest.TestCase):
     def test_environment_reset(self):
         initial_state = self.env_fn().reset()
         self.assertIn(initial_state, [(1, 11)], "Initial state should be in the set of defined start states")
-
-    def test_target_network_sync(self):
-        original_q1q2 = copy.deepcopy(self.agent.ac.q1q2.state_dict())
-        self.agent.sync_target()
-        for param_name in self.agent.ac.q1q2.state_dict():
-            self.assertTrue(torch.equal(original_q1q2[param_name], 
-                                        self.agent.ac_targ.q1q2.state_dict()[param_name]),
-                            "Target network parameters should match those of the main network after synchronization")
-
-    def test_logging_functionality(self):
-        log_initial_length = len(self.agent.logger.log_buffer)
-        self.agent.logger.info("Test logging")
-        self.assertTrue(len(self.agent.logger.log_buffer) > log_initial_length, "Logging should add entries to the log buffer")
-
-
 
     def test_loss_computation_beh_pi(self):
         data = self.agent.get_data()

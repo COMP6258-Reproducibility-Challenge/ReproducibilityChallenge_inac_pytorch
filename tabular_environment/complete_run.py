@@ -52,7 +52,7 @@ def run_multiple_experiments(learning_rates, num_runs, dataset_name):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run multiple experiments with a specific dataset')
-    parser.add_argument('--dataset', choices=['expert', 'random', 'missing', 'mixed'], default='expert', help='Specify which dataset to use.')
+    parser.add_argument('--dataset', choices=['expert', 'random', 'missing1', 'mixed', 'missing2'], default='expert', help='Specify which dataset to use.')
 
     args = parser.parse_args()
 
