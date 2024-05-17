@@ -8,11 +8,11 @@ from core.agent.in_sample import InSampleAConline
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="run_file")
     parser.add_argument('--seed', default=0, type=int)
-    parser.add_argument('--env_name', default='Walker2d', type=str)  # Corrected to 'Walker2d'
+    parser.add_argument('--env_name', default='Walker2d', type=str)
     parser.add_argument('--dataset', default='medexp', type=str)
     parser.add_argument('--discrete_control', default=0, type=int)
-    parser.add_argument('--state_dim', default=17, type=int)  # Example dimension
-    parser.add_argument('--action_dim', default=6, type=int)  # Example dimension
+    parser.add_argument('--state_dim', default=17, type=int)
+    parser.add_argument('--action_dim', default=6, type=int)
     parser.add_argument('--tau', default=0.1, type=float)
     
     parser.add_argument('--max_steps', default=1000000, type=int)
@@ -65,9 +65,9 @@ if __name__ == '__main__':
         logger=cfg.logger
     )
 
-    actor_path = '/home/jhj1g23/deeplearningpaper/inac_pytorch/data/output/Walker2d/expert/0/0_run/parameters/actor_net'
-    critic_path = '/home/jhj1g23/deeplearningpaper/inac_pytorch/data/output/Walker2d/expert/0/0_run/parameters/critic_net'
-    vs_path = '/home/jhj1g23/deeplearningpaper/inac_pytorch/data/output/Walker2d/expert/0/0_run/parameters/vs_net'
+    actor_path = 'inac_pytorch/data/output/Walker2d/expert/0/0_run/parameters/actor_net'
+    critic_path = 'inac_pytorch/data/output/Walker2d/expert/0/0_run/parameters/critic_net'
+    vs_path = 'inac_pytorch/data/output/Walker2d/expert/0/0_run/parameters/vs_net'
     agent_obj.load_pretrained_models(actor_path, critic_path, vs_path)
 
     run_funcs.run_steps(agent_obj, cfg.max_steps, cfg.log_interval, exp_path)
