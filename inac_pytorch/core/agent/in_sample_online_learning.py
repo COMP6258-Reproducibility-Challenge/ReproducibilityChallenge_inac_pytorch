@@ -7,7 +7,7 @@ import torch
 from core.network.policy_factory import MLPCont, MLPDiscrete
 from core.network.network_architectures import DoubleCriticNetwork, DoubleCriticDiscrete, FCNetwork
 
-class InSampleAC(base.Agent):
+class InSampleAConline(base.Agent):
     def __init__(self,
                  device,
                  discrete_control,
@@ -29,7 +29,7 @@ class InSampleAC(base.Agent):
                  evaluation_criteria,
                  logger
                  ):
-        super(InSampleAC, self).__init__(
+        super(InSampleAConline, self).__init__(
             exp_path=exp_path,
             seed=seed,
             env_fn=env_fn,
